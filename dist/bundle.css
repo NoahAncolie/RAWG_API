@@ -1,6 +1,118 @@
 /*!*************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/style/index.scss ***!
   \*************************************************************************************************************************************************************************************/
-.red {
-  color: rgb(255, 20, 20);
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  margin: 0 5%;
+  background-color: #080708;
+  color: #3772ff;
+}
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5%;
+  font-size: x-large;
+  justify-content: space-between;
+}
+
+.search-form h1 {
+  width: 45%;
+}
+
+.search-form form {
+  width: 45%;
+}
+
+.gameMain {
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media screen and (min-width: 768px) {
+  .gameMain {
+    width: 25vw;
+    justify-content: center;
+  }
+}
+
+.gameMainImg {
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+@media screen and (min-width: 768px) {
+  .gameMainImg {
+    width: 25vw;
+    justify-content: center;
+  }
+}
+
+.gameInfos {
+  padding: 10px;
+}
+
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cardGame {
+  border-radius: 15px;
+  color: #e6e8e6;
+  background-color: #3772ff;
+  margin: 5vh 0;
+}
+
+.myBtn {
+  padding: 10px;
+  border: 1px solid #fdca40;
+}
+
+.openArticleBtn {
+  padding: 10px;
+  border: #080708 solid 1px;
+}
+.openArticleBtn::after {
+  width: 0;
+  height: 0;
+  border-left: 10px #3772ff solid;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 10px);
+}
+
+video {
+  opacity: 0%;
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+@media screen and (min-width: 768px) {
+  video {
+    width: 25vw;
+    justify-content: center;
+  }
+}
+
+.show {
+  transition: 0.5s ease-in-out;
+  opacity: 100%;
 }

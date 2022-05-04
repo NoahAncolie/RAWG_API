@@ -1,5 +1,130 @@
-$color-red: rgb(255, 20, 20);
+$black: #080708;
+$yellow: #fdca40;
+$red: #df2935;
+$blue: #3772ff;
+$platin: #e6e8e6;
 
-.red {
-    color: $color-red;
+@mixin media-min($_min-width) {
+  @media screen and (min-width: $_min-width) {
+    & {
+      @content;
+    }
+  }
+}
+
+@mixin rightArrow($_size:10px, $_color:#e6e8e6) {
+  &::after {
+    width: 0;
+    height: 0;
+    border-left: $_size $_color solid;
+    border-top: $_size solid transparent;
+    border-bottom: $_size solid transparent;
+    position: absolute;
+    right: $_size;
+    top: calc(50% - #{$_size})
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  margin: 0 5%;
+  background-color: $black;
+  color: $blue;
+}
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5%;
+  font-size: x-large;
+  justify-content: space-between;
+}
+
+.search-form h1 {
+  width: 45%;
+}
+
+.search-form form {
+  width: 45%;
+}
+
+.gameMain {
+  width: 100%;
+
+  @include media-min(768px) {
+    width: 25vw;
+    justify-content: center;
+  }
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.gameMainImg {
+  width: 100%;
+
+  @include media-min(768px) {
+    width: 25vw;
+    justify-content: center;
+  }
+  border-radius: 15px 15px 0 0;
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%
+}
+
+.gameInfos {
+  padding: 10px;
+}
+
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cardGame {
+  border-radius: 15px;
+  color: $platin;
+  background-color: #3772ff;
+  margin: 5vh 0;
+}
+
+.myBtn {
+  padding: 10px;
+  border: 1px solid $yellow;
+}
+
+.openArticleBtn {
+    padding: 10px;
+    border: $black solid 1px;
+    @include rightArrow($_color:$blue);
+}
+
+video {
+  opacity: 0%;
+  width: 100%;
+
+  @include media-min(768px) {
+    width: 25vw;
+    justify-content: center;
+  }
+  border-radius: 15px 15px 0 0;
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%
+}
+
+.show {
+  transition: 0.5s ease-in-out;
+  opacity: 100%;
 }

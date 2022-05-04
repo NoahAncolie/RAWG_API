@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Basic routing</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <title>INDEX THP</title>
+    <link rel="stylesheet" href="./dist/bundle.css" />
   </head>
-
-  <body>
+  <body class="body">
+    <div class="navbar">
+      <div class="title">
+        <h1>Progame Loop</h1>
+      </div>
+      <div class="search-form">
+        <form action="#">
+          <input type="text" class="search-bar" id="search">
+          <input type="submit" class="submit-btn" id="submit-request" value="rechercher">
+        </form>
+      </div>
+    </div>
     <a href="#">Home</a>
     <a href="#pagelist">PageList</a>
     <a href="#pagelist/borderlands">PageList borderlands</a>
 
     <section id="pageContent">Choisissez un lien</section>
 
-    <script src="js/Home.js"></script>
-    <script src="js/PageList.js"></script>
-    <script src="js/PageDetail.js"></script>
-    <script src="js/routes.js"></script>
-    <script src="js/index.js"></script>
   </body>
   <script src="./dist/bundle.js"></script>
 </html>
