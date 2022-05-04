@@ -1,13 +1,12 @@
 const API_KEY = process.env.RAGW_KEY
 
-const PageList = (argument = '') => {
+const PlatformSearch = (argument = '') => {
     const imgNames = ['linux', 'mobile', 'playstation', 'search', 'switch', 'pc', 'xbox']
 
     const preparePage = () => {
         const cleanedArgument = argument.trim().replace(/\s+/g, '-');
 
         const displayResults = (articles) => {
-            
             const resultsContent = articles.map((article) => (
                 `<article class="cardGame">
                     <div id="${article.id}" class="gameMain" style="background-image: url('${article.background_image}')">
@@ -45,7 +44,8 @@ const PageList = (argument = '') => {
                     if (imgNames.filter(name => platform.platform.slug.includes(name) && !already.includes(name)).length > 0) {
                         already += platform.platform.slug
                         platformDiv.innerHTML += 
-                        `<a href="#platform/${platform.platform.slug}"><img src="./src/assets/images/${imgNames.filter(name => platform.platform.slug.includes(name))[0]}.svg" class="svg"></a>`                    }
+                        `<a href="#platform/${platform.platform.slug}"><img src="./src/assets/images/${imgNames.filter(name => platform.platform.slug.includes(name))[0]}.svg" class="svg"></a>`
+                    }
                 })
             })
             let elements = document.getElementsByClassName('cardGame')
@@ -60,12 +60,14 @@ const PageList = (argument = '') => {
         };
 
         const fetchList = (url, argument) => {
-            const finalURL = argument ? `${url}&search=${argument}` : url;
+            const finalURL = argument ? `${url}&platforms=${argument}` : url;
             fetch(finalURL)
                 .then((response) => response.json())
                 .then((responseData) => {
                     displayResults(responseData.results)
-                })
+                }).catch((error) => {
+                    console.error(error)
+                });
         };
 
         const getVideo = (id) => {
@@ -74,7 +76,9 @@ const PageList = (argument = '') => {
                 .then ((responseData) => {
                     console.log(responseData);
                     addVideo(responseData, id)
-                })
+                }).catch((error) => {
+                    console.error(error)
+                });
         };
         
         const addVideo = (data, id) => {
@@ -113,4 +117,4 @@ const PageList = (argument = '') => {
     render();
 };
 
-export { PageList }
+export { PlatformSearch }

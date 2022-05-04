@@ -1,13 +1,12 @@
 const API_KEY = process.env.RAGW_KEY
 
-const PageList = (argument = '') => {
+const Search = (argument = '') => {
     const imgNames = ['linux', 'mobile', 'playstation', 'search', 'switch', 'pc', 'xbox']
 
     const preparePage = () => {
         const cleanedArgument = argument.trim().replace(/\s+/g, '-');
 
         const displayResults = (articles) => {
-            
             const resultsContent = articles.map((article) => (
                 `<article class="cardGame">
                     <div id="${article.id}" class="gameMain" style="background-image: url('${article.background_image}')">
@@ -65,16 +64,19 @@ const PageList = (argument = '') => {
                 .then((response) => response.json())
                 .then((responseData) => {
                     displayResults(responseData.results)
-                })
+                }).catch((error) => {
+                    console.error(error)
+                });
         };
 
         const getVideo = (id) => {
             fetch(`https://api.rawg.io/api/games/${id}/movies?key=${API_KEY}`)
                 .then((response) => response.json())
                 .then ((responseData) => {
-                    console.log(responseData);
                     addVideo(responseData, id)
-                })
+                }).catch((error) => {
+                    console.error(error)
+                });
         };
         
         const addVideo = (data, id) => {
@@ -96,7 +98,7 @@ const PageList = (argument = '') => {
             }
         }
 
-        fetchList(`https://api.rawg.io/api/games?dates=2021-01-01,2023-01-01&ordering=-released&key=${API_KEY}`, cleanedArgument);
+        fetchList(`https://api.rawg.io/api/games?page_size=9&key=${API_KEY}`, cleanedArgument);
     };
 
     const render = () => {
@@ -113,4 +115,4 @@ const PageList = (argument = '') => {
     render();
 };
 
-export { PageList }
+export { Search }
