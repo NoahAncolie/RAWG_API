@@ -1,4 +1,5 @@
 const API_KEY = process.env.RAGW_KEY
+import { Similar } from "./similar";
 
 const Game = (argument = '') => {
     const preparePage = () => {
@@ -10,12 +11,12 @@ const Game = (argument = '') => {
             articleDOM.querySelector("div.game-background-img").style.backgroundImage = `url('${gameData.background_image}')`
             articleDOM.querySelector("h1.title").innerHTML = gameData.name;
             articleDOM.querySelector("p.description").innerHTML = gameData.description;
-            articleDOM.querySelector("h3.developers").innerHTML = `Developers : <small>${gameData.developers[0].name}</small>`;
+            articleDOM.querySelector("h3.developers").innerHTML = `Developers : <small><a href="#searchby/developers$${gameData.developers[0].id}$9">${gameData.developers[0].name}</a></small>`;
             if (gameData.released) {articleDOM.querySelector("h3.release-date").innerHTML = `Released : <small>${gameData.released}</small>`}
             if (gameData.platforms.length > 0) {
               let all = ""
               for (let i = 0; i < gameData.platforms.length; i++) {
-                all += `<a href="#platform/${gameData.platforms[i].platform.id}">${gameData.platforms[i].platform.name}</a>`
+                all += `<a href="#searchby/platforms$${gameData.platforms[i].platform.id}$9">${gameData.platforms[i].platform.name}</a>`
                 if (i < gameData.platforms.length - 1) { all += ", " }
               }
               articleDOM.querySelector("h3.platforms").innerHTML = `Platforms : <small>${all}</small>`
@@ -38,7 +39,7 @@ const Game = (argument = '') => {
           if (list.length > 0) {
             let all = ""
             for (let i = 0; i < list.length; i++) {
-              all += list[i].name
+              all += `<a href="#searchby/${listName.toLowerCase()}$${list[i].id}$9">${list[i].name}</a>`
               if (i < list.length - 1) { all += ", " }
             }
             articleDOM.querySelector(`h3.${listName.toLowerCase()}`).innerHTML = `${listName} : <small>${all}</small>`
@@ -111,7 +112,7 @@ const Game = (argument = '') => {
               <div class="trailerVideo"></div>
               <h1 class="title">SCREENSHOTS</h1>
               <div class="screenshots"></div>
-              <div class="useful-links"></h1>
+              <div class="useful-links"></div>
             </div>
           </section>
         `;
