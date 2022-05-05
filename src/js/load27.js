@@ -1,8 +1,7 @@
 const API_KEY = process.env.RAGW_KEY
 import Masonry from 'masonry-layout';
 
-const PageList = (argument = '') => {
-    console.log(argument)
+const load27 = (argument = '') => {
     const imgNames = ['linux', 'mobile', 'playstation', 'search', 'switch', 'pc', 'xbox']
 
     const preparePage = () => {
@@ -43,13 +42,12 @@ const PageList = (argument = '') => {
             articles.map(article => {
                 let already = []
                 let platformDiv = document.getElementsByClassName(`${article.id}`)[0]
-                if (article.platforms) {
-                    article.platforms.map(platform => {
-                        if (imgNames.filter(name => platform.platform.slug.includes(name) && !already.includes(name)).length > 0) {
-                            already += platform.platform.slug
-                            platformDiv.innerHTML += 
-                            `<a href="#platform/${platform.platform.id}"><img src="./src/assets/images/${imgNames.filter(name => platform.platform.slug.includes(name))[0]}.svg" class="svg"></a>`                    }
-                })}
+                article.platforms.map(platform => {
+                    if (imgNames.filter(name => platform.platform.slug.includes(name) && !already.includes(name)).length > 0) {
+                        already += platform.platform.slug
+                        platformDiv.innerHTML += 
+                        `<a href="#platform/${platform.platform.id}"><img src="./src/assets/images/${imgNames.filter(name => platform.platform.slug.includes(name))[0]}.svg" class="svg"></a>`                    }
+                })
             })
             let elements = document.getElementsByClassName('cardGame')
             for (let i = 0; i < elements.length; i++) {
@@ -103,7 +101,7 @@ const PageList = (argument = '') => {
             }
         }
 
-        fetchList(`https://api.rawg.io/api/games?page_size=9&dates=2021-01-01,2023-01-01&ordering=-released&key=${API_KEY}`, cleanedArgument);
+        fetchList(`https://api.rawg.io/api/games?page_size=27&dates=2021-01-01,2023-01-01&ordering=-released&key=${API_KEY}`, cleanedArgument);
     };
 
     const render = () => {
@@ -111,7 +109,6 @@ const PageList = (argument = '') => {
           <section class="page-list from-bottom">
             <div class="articles">Loading...</div>
           </section>
-          <a href="#load18" class="myBtn">LOAD MORE</a>
         `;
 
         preparePage();
@@ -120,4 +117,4 @@ const PageList = (argument = '') => {
     render();
 };
 
-export { PageList }
+export { load27 }

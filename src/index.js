@@ -1,6 +1,8 @@
 import './style/index.scss'
 import { routes } from './js/routes.js'
 
+let pageNumber = 0
+
 function callRoute() {
     const { hash } = window.location;
     console.log('============='+window.location+'=============')
@@ -13,7 +15,7 @@ function callRoute() {
     const pageFunction = routes[pageName];
 
     if (pageFunction !== undefined) {
-        pageFunction(pageArgument);
+        pageFunction(pageArgument, pageNumber);
     }
 }
 
@@ -23,5 +25,10 @@ document.getElementById('submit-request').addEventListener("click", function(){
     link.click();
 })
 
-window.addEventListener('hashchange', () => callRoute());
+window.addEventListener('hashchange', () => {
+    document.getElementsByClassName('transition-round-blue')[0].remove()
+    document.getElementsByClassName('transition-round-black')[0].remove()
+    document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div class="transition-round-black"></div>')
+    document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div class="transition-round-blue"></div>')
+    callRoute()});
 window.addEventListener('DOMContentLoaded', () => callRoute());

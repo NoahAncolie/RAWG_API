@@ -1,4 +1,5 @@
 const API_KEY = process.env.RAGW_KEY
+import Masonry from "masonry-layout";
 
 const PlatformSearch = (argument = '') => {
     const imgNames = ['linux', 'mobile', 'playstation', 'search', 'switch', 'pc', 'xbox']
@@ -44,7 +45,7 @@ const PlatformSearch = (argument = '') => {
                     if (imgNames.filter(name => platform.platform.slug.includes(name) && !already.includes(name)).length > 0) {
                         already += platform.platform.slug
                         platformDiv.innerHTML += 
-                        `<a href="#platform/${platform.platform.slug}"><img src="./src/assets/images/${imgNames.filter(name => platform.platform.slug.includes(name))[0]}.svg" class="svg"></a>`
+                        `<a href="#platform/${platform.platform.id}"><img src="./src/assets/images/${imgNames.filter(name => platform.platform.slug.includes(name))[0]}.svg" class="svg"></a>`
                     }
                 })
             })
@@ -57,6 +58,11 @@ const PlatformSearch = (argument = '') => {
                     document.getElementsByClassName('more-about-game')[i].classList.toggle('collapse')
                 })
             }
+            const grid = document.querySelector('.articles')
+            const masonry = new Masonry(grid, {
+                itemSelector: '.cardGame',
+                gutter: 20,
+            });
         };
 
         const fetchList = (url, argument) => {
@@ -64,6 +70,7 @@ const PlatformSearch = (argument = '') => {
             fetch(finalURL)
                 .then((response) => response.json())
                 .then((responseData) => {
+                    console.log(url);
                     displayResults(responseData.results)
                 }).catch((error) => {
                     console.error(error)
@@ -100,12 +107,12 @@ const PlatformSearch = (argument = '') => {
             }
         }
 
-        fetchList(`https://api.rawg.io/api/games?dates=2021-01-01,2023-01-01&ordering=-released&key=${API_KEY}`, cleanedArgument);
+        fetchList(`https://api.rawg.io/api/games?ordering=-released&key=${API_KEY}`, cleanedArgument);
     };
 
     const render = () => {
         pageContent.innerHTML = `
-          <section class="page-list">
+          <section class="page-list from-bottom">
             <div class="articles">Loading...</div>
           </section>
           <a href="" class="myBtn">LOAD MORE</a>

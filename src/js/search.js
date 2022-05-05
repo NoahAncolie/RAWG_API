@@ -1,4 +1,5 @@
 const API_KEY = process.env.RAGW_KEY
+import Masonry from 'masonry-layout';
 
 const Search = (argument = '') => {
     const imgNames = ['linux', 'mobile', 'playstation', 'search', 'switch', 'pc', 'xbox']
@@ -7,6 +8,7 @@ const Search = (argument = '') => {
         const cleanedArgument = argument.trim().replace(/\s+/g, '-');
 
         const displayResults = (articles) => {
+            console.log(articles)
             const resultsContent = articles.map((article) => (
                 `<article class="cardGame">
                     <div id="${article.id}" class="gameMain" style="background-image: url('${article.background_image}')">
@@ -26,7 +28,7 @@ const Search = (argument = '') => {
                                 <a href="#games/${article.id}/suggested">Show more like this</a>
                             </div>
                             <div class="more-element">
-                                <a href="#game/${article.slug}" class="openArticleBtn" >OPEN ARTICLE</a>
+                                <a href="#game/${article.slug}" class="myBtn" >OPEN ARTICLE</a>
                             </div>
                         </div>
                     <div class="gameInfos">
@@ -44,7 +46,7 @@ const Search = (argument = '') => {
                     if (imgNames.filter(name => platform.platform.slug.includes(name) && !already.includes(name)).length > 0) {
                         already += platform.platform.slug
                         platformDiv.innerHTML += 
-                        `<a href="#platform/${platform.platform.slug}"><img src="./src/assets/images/${imgNames.filter(name => platform.platform.slug.includes(name))[0]}.svg" class="svg"></a>`                    }
+                        `<a href="#platform/${platform.platform.id}"><img src="./src/assets/images/${imgNames.filter(name => platform.platform.slug.includes(name))[0]}.svg" class="svg"></a>`                    }
                 })
             })
             let elements = document.getElementsByClassName('cardGame')
@@ -56,6 +58,11 @@ const Search = (argument = '') => {
                     document.getElementsByClassName('more-about-game')[i].classList.toggle('collapse')
                 })
             }
+            const grid = document.querySelector('.articles')
+            const masonry = new Masonry(grid, {
+                itemSelector: '.cardGame',
+                gutter: 20,
+            });
         };
 
         const fetchList = (url, argument) => {
@@ -64,9 +71,7 @@ const Search = (argument = '') => {
                 .then((response) => response.json())
                 .then((responseData) => {
                     displayResults(responseData.results)
-                }).catch((error) => {
-                    console.error(error)
-                });
+                })
         };
 
         const getVideo = (id) => {
@@ -74,9 +79,7 @@ const Search = (argument = '') => {
                 .then((response) => response.json())
                 .then ((responseData) => {
                     addVideo(responseData, id)
-                }).catch((error) => {
-                    console.error(error)
-                });
+                })
         };
         
         const addVideo = (data, id) => {
@@ -98,12 +101,12 @@ const Search = (argument = '') => {
             }
         }
 
-        fetchList(`https://api.rawg.io/api/games?page_size=9&key=${API_KEY}`, cleanedArgument);
+        fetchList(`https://api.rawg.io/api/games?key=${API_KEY}`, cleanedArgument);
     };
 
     const render = () => {
         pageContent.innerHTML = `
-          <section class="page-list">
+          <section class="page-list from-left">
             <div class="articles">Loading...</div>
           </section>
           <a href="" class="myBtn">LOAD MORE</a>
