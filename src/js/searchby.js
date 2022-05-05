@@ -4,11 +4,12 @@ const API_KEY = process.env.RAGW_KEY
 const SearchBy = (arg = '') => {
     let argList = arg.split('$')
     console.log(argList[3])
-    const imgNames = ['linux', 'mobile', 'playstation', 'search', 'switch', 'pc', 'xbox']
+    const imgNames = ['linux', 'mobile', 'playstation', 'switch', 'pc', 'xbox']
 
     const preparePage = () => {
 
         const displayResults = (articles) => {
+            console.log(articles)
             let resultsContent = []
             for (let i = Number(argList[2]) - 9; i < articles.length; i++) {
                     resultsContent.push(`<article class="cardGame">
@@ -26,7 +27,7 @@ const SearchBy = (arg = '') => {
                                 <div>Genre</div> <div>${articles[i].released}</div>
                             </div>
                             <div class="more-element">
-                                <a href="#similar/parent-games$${articles[i].slug}$9">Show more like this</a>
+                                <a href="#searchby/genres$${articles[i].genres[0].slug}$9$random">Show more like this</a>
                             </div>
                             <div class="more-element">
                                 <a href="#game/${articles[i].slug}" class="myBtn" >OPEN ARTICLE</a>
@@ -102,7 +103,7 @@ const SearchBy = (arg = '') => {
             }
         }
 
-        if (argList[0] !== 'search') {
+        if (argList[0] !== 'search' || argList[3] === "random") {
             fetchList(`https://api.rawg.io/api/games?${argList[0]}=${argList[1]}&page_size=${argList[2]}&ordering=-released&key=${API_KEY}`);
         } else {
             fetchList(`https://api.rawg.io/api/games?${argList[0]}=${argList[1]}&page_size=${argList[2]}&key=${API_KEY}`);

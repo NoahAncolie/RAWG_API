@@ -1,5 +1,5 @@
 const API_KEY = process.env.RAGW_KEY
-import { Similar } from "./similar";
+import { SearchBy } from "./searchby";
 
 const Game = (argument = '') => {
     const preparePage = () => {
