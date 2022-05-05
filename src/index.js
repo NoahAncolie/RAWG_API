@@ -35,7 +35,7 @@ window.addEventListener('hashchange', () => {
     transition()
     callRoute()
 });
-window.addEventListener('DOMContentLoaded', () => {
-    transition()
-    callRoute()
-});
+// window.addEventListener('DOMContentLoaded', () => {
+//     transition()
+//     callRoute()
+// });

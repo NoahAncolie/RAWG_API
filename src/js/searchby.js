@@ -101,11 +101,12 @@ const SearchBy = (arg = '') => {
                 });
             }
         }
-        let ordering = ""
+
         if (argList[0] !== 'search') {
-            ordering = '&ordering=-released'
+            fetchList(`https://api.rawg.io/api/games?${argList[0]}=${argList[1]}&page_size=${argList[2]}&ordering=-released&key=${API_KEY}`);
+        } else {
+            fetchList(`https://api.rawg.io/api/games?${argList[0]}=${argList[1]}&page_size=${argList[2]}&key=${API_KEY}`);
         }
-        fetchList(`https://api.rawg.io/api/games?${argList[0]}=${argList[1]}&page_size=${argList[2]}${ordering}&key=${API_KEY}`);
     };
 
     const render = () => {
