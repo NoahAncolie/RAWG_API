@@ -305,8 +305,16 @@ video {
   animation: open 1.1s ease-in-out;
 }
 
-.from-left {
+.from-bottom {
   animation: fromLeft 1.5s ease-in-out;
+}
+
+.unfade {
+  animation: unfade 1.4s ease-in-out;
+}
+
+@keyframes unfade {
+  0% { opacity: 0; }
 }
 
 @keyframes fromLeft {

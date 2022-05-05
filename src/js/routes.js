@@ -13,7 +13,7 @@ const routes = {
     'platform': PlatformSearch,
     'search': Search,
     'load18': load18,
-    'load27': load27
+    'load27': load27,
 };
 
 export { routes }

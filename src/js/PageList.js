@@ -113,7 +113,6 @@ const PageList = (argument = '') => {
           </section>
           <a href="#load18" class="myBtn">LOAD MORE</a>
         `;
-
         preparePage();
     };
 

@@ -27,7 +27,7 @@ const PlatformSearch = (argument = '') => {
                                 <a href="#games/${article.id}/suggested">Show more like this</a>
                             </div>
                             <div class="more-element">
-                                <a href="#game/${article.slug}" class="openArticleBtn" >OPEN ARTICLE</a>
+                                <a href="#game/${article.slug}" class="myBtn" >OPEN ARTICLE</a>
                             </div>
                         </div>
                     <div class="gameInfos">

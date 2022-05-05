@@ -19,6 +19,15 @@ function callRoute() {
     }
 }
 
+const transition = () => {
+    document.getElementsByTagName('body')[0].classList.toggle('unfade')
+    document.getElementsByTagName('body')[0].classList.toggle('unfade')
+    document.getElementsByClassName('transition-round-blue')[0].remove()
+    document.getElementsByClassName('transition-round-black')[0].remove()
+    document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div class="transition-round-black"></div>')
+    document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div class="transition-round-blue"></div>')
+}
+
 document.getElementById('submit-request').addEventListener("click", function(){
     let link = document.createElement("a");
     link.href = `#search/${document.getElementById('search').value}`;
@@ -26,9 +35,10 @@ document.getElementById('submit-request').addEventListener("click", function(){
 })
 
 window.addEventListener('hashchange', () => {
-    document.getElementsByClassName('transition-round-blue')[0].remove()
-    document.getElementsByClassName('transition-round-black')[0].remove()
-    document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div class="transition-round-black"></div>')
-    document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div class="transition-round-blue"></div>')
-    callRoute()});
-window.addEventListener('DOMContentLoaded', () => callRoute());
+    transition()
+    callRoute()
+});
+window.addEventListener('DOMContentLoaded', () => {
+    transition()
+    callRoute()
+});
