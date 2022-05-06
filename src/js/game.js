@@ -32,6 +32,7 @@ const Game = (argument = '') => {
             getVideo(gameData.id)
             articleDOM.querySelector("div.useful-links").innerHTML = `<a href="${gameData.website}"><h1>Website</h1></a><br><a href="${gameData.reddit_url}"><h1>Reddit : <small>${gameData.reddit_name}</small></h1>`
             getScreenShots(gameData.id)
+            SearchBy(`genres$${gameData.genres[0].slug}$6$only`)
         };
 
         const listContent = (listName, list) => {
@@ -113,6 +114,10 @@ const Game = (argument = '') => {
               <h1 class="title">SCREENSHOTS</h1>
               <div class="screenshots"></div>
               <div class="useful-links"></div>
+              <h1 class="title">Similar games</h1>
+              <div class="page-list">
+                <div class="articles"></div>
+              </div>
             </div>
           </section>
         `;
